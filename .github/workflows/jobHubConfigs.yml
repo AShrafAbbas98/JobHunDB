@@ -11,5 +11,8 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      - name: run SQL Script
-        run: mysql -h localhost --port 1433 -"" -"" -e "source JobHunDb.JobHub.sql"
+      - name: Run SQL Script
+        run: |
+          sqlcmd -S localhost -d JobHub -i JobHubDb.JobHub.sql
+        env:
+          SQLSERVER_SA_PASSWORD: ${{ secrets.SQLSERVER_SA_PASSWORD }}
