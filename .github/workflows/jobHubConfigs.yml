@@ -1,5 +1,5 @@
-name: jobHubDb
-run-name: setting up the jobHubDb Database
+name: setup-JobHub
+run-name: Setting up the JobHub Database
 on: [push]
 jobs:
   test-output:
@@ -7,3 +7,14 @@ jobs:
     steps:
       - name: Test Output
         run: echo "Here is a test"
+  connect-remote:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install SQL Server Command Line Tools
+        run: |
+          Invoke-WebRequest -Uri https://download.microsoft.com/download/e/4/1/e41f8d0b-c2c5-4b87-8981-baf62c548914/sqlcmd.msi -OutFile sqlcmd.msi
+          Start-Process msiexec.exe -ArgumentList '/i sqlcmd.msi /quiet' -NoNewWindow -Wait
+      - name: Connect to SQL Server and Show Databases
+        run: |
+          sqlcmd -S . -d master -Q "SELECT name FROM sys.databases"
