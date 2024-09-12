@@ -1,0 +1,9 @@
+name: jobHubDb
+run-name: setting up the jobHubDb Database
+on: [push]
+jobs:
+  test-output:
+    runs-on: windows-latest
+    steps:
+      - name: Test Output
+        run: echo "Here is a test"
