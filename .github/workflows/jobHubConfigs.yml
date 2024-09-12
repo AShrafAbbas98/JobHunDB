@@ -13,6 +13,6 @@ jobs:
       - uses: actions/checkout@v3
       - name: Run SQL Script
         run: |
-          sqlcmd -S localhost -d JobHub -i JobHubDb.JobHub.sql
+          sqlcmd -S localhost -d JobHub -i JobHunDb.JobHub.sql
         env:
           SQLSERVER_SA_PASSWORD: ${{ secrets.SQLSERVER_SA_PASSWORD }}
